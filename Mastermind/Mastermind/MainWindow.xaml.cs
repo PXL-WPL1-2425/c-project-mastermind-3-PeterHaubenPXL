@@ -61,6 +61,7 @@ namespace Mastermind
         int playerCounter = 0;
 
         string namePlayer = "";
+        string nameNextPlayer = "";
 
         public MainWindow()
         {
@@ -254,7 +255,7 @@ namespace Mastermind
             points -= 8;
             scoreLabel.Content = $"Poging {attempts}/{chosenAttempts} Score = {points}";
 
-            if (attempts < 10)
+            if (attempts < chosenAttempts)
             {
                 // Als attempst aangepast wordt, moet ook de StackPanels aangepast worden
                 // Hier en in timer_Tick
@@ -262,19 +263,29 @@ namespace Mastermind
             }
             else
             {
-                // Spel einde na 10 beurten
+                // Spel einde na chosenAttempts beurten
 
                 debugStackPanel.Visibility = Visibility.Visible;
 
-                MessageBoxResult result = MessageBox.Show($"You failed! De correcte code was {codeString}.\nNog eens proberen?", "FAILED", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-                if (result == MessageBoxResult.Yes)
+                if (playerCounter < players.Count)
                 {
-                    newGameButton_Click(null, null);
+                    MessageBox.Show($"You failed! De correcte code was {codeString}.\nNu is speler {nameNextPlayer} aan de beurt", $"{namePlayer}", MessageBoxButton.OK);
+
+                    StartGame();
                 }
                 else
                 {
-                    this.Close();
+                    MessageBoxResult result = MessageBox.Show($"You failed! De correcte code was {codeString}.\nSpelreeks ten einde\n\nWil je nog een reeks spelen?", $"{namePlayer}", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        playerCounter = 0;
+                        StartGame();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
                 }
             }
 
@@ -697,7 +708,6 @@ namespace Mastermind
         {
             controlButton.IsDefault = true;
 
-
             if (!gameStarted)
             {
                 inputPlayers();
@@ -716,6 +726,25 @@ namespace Mastermind
 
         private void StartGame()
         {
+            int counter = 0;
+            foreach (var player in players)
+            {
+                if (counter == playerCounter)
+                {
+                    namePlayer = player;
+                    if (playerCounter < players.Count )
+                    {
+                        MessageBox.Show($"{namePlayer}, klik op Oke als je klaar bent voor je spel", "Ben je klaar?");
+                    }
+                }
+                else if(counter > playerCounter)
+                {
+                    nameNextPlayer = player;
+                    break;
+                }
+                counter++;
+            }
+
             if (playerCounter < players.Count)
             {
                 playerCounter++;
@@ -725,21 +754,6 @@ namespace Mastermind
             {
                 newGameButton.IsEnabled = true;
                 return;
-            }
-
-            int counter = 0;
-            foreach (var player in players)
-            {
-                if (counter == playerCounter)
-                {
-                    namePlayer = player;
-                    if (playerCounter < players.Count)
-                    {
-                        MessageBox.Show($"{namePlayer}, klik op Oke als je klaar bent voor je spel", "Ben je klaar?");
-                    }
-                    break;
-                }
-                counter++;
             }
 
             gameStarted = true;
@@ -1052,34 +1066,28 @@ namespace Mastermind
                         }
                     }
 
-                    MessageBox.Show($"Proficiat! {namePlayer}\n\nJe hebt de code gekraakt in {attempts} pogingen\n\tmet {points} op 100", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                    
 
                     if (playerCounter < players.Count)
                     {
+                        MessageBox.Show($"Proficiat! {namePlayer}\n\nJe hebt de code gekraakt in {attempts} pogingen\n\tmet {points} op 100\n\nNu is {nameNextPlayer} aan de beurt", $"{namePlayer}", MessageBoxButton.OK, MessageBoxImage.Information);
                         StartGame();
-                        
                     }
                     else
                     {
-                        MessageBoxResult result = MessageBox.Show("Wil je nog een spelreeks starten?", "ToDo",MessageBoxButton.YesNo);
+                        MessageBox.Show($"Proficiat! {namePlayer}\n\nJe hebt de code gekraakt in {attempts} pogingen\n\tmet {points} op 100", $"{namePlayer}", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBoxResult result = MessageBox.Show("Wil je nog een spelreeks starten?", "ToDo", MessageBoxButton.YesNo);
                         if (result == MessageBoxResult.Yes)
                         {
-                            MessageBox.Show("ToDo Voorlopig dezelfde spelers","ToDo");
+                            MessageBox.Show("ToDo Voorlopig dezelfde spelers", "ToDo");
                             playerCounter = 0;
 
-                            //foreach (var player in players)
-                            //{
-                            //    namePlayer = player;
-                                StartGame();
-                                //break;
-                            //}
+                            StartGame();
                         }
                         else
                         {
-                            MessageBox.Show("ToDo PlayersList() aanpassen","ToDo");
+                            MessageBox.Show("ToDo PlayersList() aanpassen", "ToDo");
                         }
-                        
-                        newGameButton.IsEnabled = true;
                     }
                 }
                 else
@@ -1222,24 +1230,37 @@ namespace Mastermind
 
                         debugStackPanel.Visibility = Visibility.Visible;
 
-                        MessageBoxResult result = MessageBox.Show($"You failed! De correcte code was {codeString}.\nNog eens proberen?", "FAILED", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-                        if (result == MessageBoxResult.Yes)
+                        if (playerCounter < players.Count)
                         {
-                            newGameButton_Click(null, null);
+                            MessageBox.Show($"You failed! De correcte code was {codeString}.\nNu is speler {nameNextPlayer} aan de beurt", $"{namePlayer}", MessageBoxButton.OK);
+
+                            StartGame();
                         }
                         else
                         {
-                            this.Close();
+                            MessageBoxResult result = MessageBox.Show($"You failed! De correcte code was {codeString}.\nSpelreeks ten einde\n\nWil je nog een reeks spelen?", $"{namePlayer}", MessageBoxButton.YesNo,MessageBoxImage.Question);
+
+                            if (result == MessageBoxResult.Yes)
+                            {
+                                playerCounter = 0;
+                                StartGame();
+                            }
+                            else
+                            {
+                                this.Close();
+                            }
                         }
+
+
+                        
                     }
                 }
-                }
-                else
-                {
-                    MessageBox.Show("Maak een keuze voor alle vakken", "Keuze");
-                }
             }
+            else
+            {
+                MessageBox.Show("Maak een keuze voor alle vakken", "Keuze");
+            }
+        }
 
         private void ChangeBorder(int attempst, int code, int colorPositie = 0)
         {
