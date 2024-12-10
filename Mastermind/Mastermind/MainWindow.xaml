@@ -48,11 +48,13 @@
         </StackPanel>
         
         <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Click="newGameButton_Click"  FontSize="20" Name="newGameButton" Content="Nieuw spel" Margin="8" Width="150"></Button>
-            <Button Click="controlButton_Click" IsDefault="True" FontSize="20" Name="controlButton" Content="Controleren" Margin="8" Width="150"></Button>
+            <Button Padding="8" Click="newGameButton_Click"  FontSize="20" Name="newGameButton" Content="Nieuw spel" Margin="8"></Button>
+            <Button Padding="8" Click="controlButton_Click" IsDefault="True" FontSize="20" Name="controlButton" Content="Controleren" Margin="8"></Button>
+            <Button Padding="8" Click="hintButton_Click" FontSize="20" Name="hintButton" Content="Hint" Margin="8"></Button>
+
         </StackPanel>
         
-        <Label Name="scoreLabel" Margin="10" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="6" FontSize="20" HorizontalContentAlignment="Center" Content="" Background="White"></Label>
+        <Label Name="scoreLabel" Margin="10" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" FontSize="20" HorizontalContentAlignment="Center" Content="" Background="White"></Label>
         
         <StackPanel Name="seriesStackPanel" Orientation="Vertical" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="6">
             <StackPanel Name="serie1StackPanel" Orientation="Horizontal"></StackPanel>

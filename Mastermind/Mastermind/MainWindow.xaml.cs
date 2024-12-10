@@ -150,10 +150,10 @@ namespace Mastermind
                         lbl.Name = $"serie{i - 2}{j - 1}";
                         lbl.Width = 54;
                         lbl.Height = 54;
-                        lbl.ToolTip = lbl.Name;
                         lbl.Background = Brushes.DarkGray;
                         lbl.BorderThickness = new Thickness(8);
                         lbl.BorderBrush = Brushes.Transparent;
+                        lbl.ToolTip = null;
 
                         if (j == 1)
                         {
@@ -302,26 +302,31 @@ namespace Mastermind
 
         private void ResetLabels()
         {
-            // Kleuren verloren beurt Gray maken
+            // Kleuren verloren beurt DarkGray maken
 
             int counter = 0;
 
             for (int i = list.Count - 1; i >= 1; i--)
             {
                 counter = 0;
-                foreach (var item in list[i - 1].Children)
+
+                if (list[i].Visibility == Visibility.Visible)
                 {
-                    if (item is Label lbl)
+                    foreach (var item in list[i - 1].Children)
                     {
-                        if (counter > 0)
+                        if (item is Label lbl)
                         {
-                            lbl.Background = Brushes.DarkGray;
-                            lbl.BorderBrush = Brushes.Transparent;
+                            if (counter > 0)
+                            {
+                                lbl.Background = Brushes.DarkGray;
+                                lbl.BorderBrush = Brushes.Transparent;
+                                lbl.ToolTip = null;
+                            }
                         }
+                        counter++;
                     }
-                    counter++;
+                    return;
                 }
-                return;
             }
         }
 
@@ -732,12 +737,12 @@ namespace Mastermind
                 if (counter == playerCounter)
                 {
                     namePlayer = player;
-                    if (playerCounter < players.Count )
+                    if (playerCounter < players.Count)
                     {
                         MessageBox.Show($"{namePlayer}, klik op Oke als je klaar bent voor je spel", "Ben je klaar?");
                     }
                 }
-                else if(counter > playerCounter)
+                else if (counter > playerCounter)
                 {
                     nameNextPlayer = player;
                     break;
@@ -943,6 +948,7 @@ namespace Mastermind
                                 {
                                     lbl.Background = Brushes.DarkGray;
                                     lbl.BorderBrush = Brushes.Transparent;
+                                    lbl.ToolTip = null;
                                 }
                             }
                             counter++;
@@ -1066,7 +1072,7 @@ namespace Mastermind
                         }
                     }
 
-                    
+
 
                     if (playerCounter < players.Count)
                     {
@@ -1238,7 +1244,7 @@ namespace Mastermind
                         }
                         else
                         {
-                            MessageBoxResult result = MessageBox.Show($"You failed! De correcte code was {codeString}.\nSpelreeks ten einde\n\nWil je nog een reeks spelen?", $"{namePlayer}", MessageBoxButton.YesNo,MessageBoxImage.Question);
+                            MessageBoxResult result = MessageBox.Show($"You failed! De correcte code was {codeString}.\nSpelreeks ten einde\n\nWil je nog een reeks spelen?", $"{namePlayer}", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                             if (result == MessageBoxResult.Yes)
                             {
@@ -1252,7 +1258,7 @@ namespace Mastermind
                         }
 
 
-                        
+
                     }
                 }
             }
@@ -1282,10 +1288,12 @@ namespace Mastermind
                                     if (colorPositie == 1)
                                     {
                                         lbl.BorderBrush = Brushes.DarkRed;
+                                        lbl.ToolTip = "Rode rand: \"Juiste kleur, juiste positie\"";
                                     }
                                     else
                                     {
                                         lbl.BorderBrush = Brushes.Wheat;
+                                        lbl.ToolTip = "Witte rand: \"Juiste kleur, foute positie\"";
                                     }
                                     return;
                                 }
@@ -1492,6 +1500,11 @@ namespace Mastermind
         private void newGameMenuItem_Click(object sender, RoutedEventArgs e)
         {
             newGameButton_Click(null, null);
+        }
+
+        private void hintButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
