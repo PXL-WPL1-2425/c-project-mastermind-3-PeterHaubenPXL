@@ -52,7 +52,7 @@
             <Button Click="controlButton_Click" IsDefault="True" FontSize="20" Name="controlButton" Content="Controleren" Margin="8" Width="150"></Button>
         </StackPanel>
         
-        <Label Name="scoreLabel" Margin="10" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" FontSize="20" HorizontalContentAlignment="Center" Content="" Background="White"></Label>
+        <Label Name="scoreLabel" Margin="10" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="6" FontSize="20" HorizontalContentAlignment="Center" Content="" Background="White"></Label>
         
         <StackPanel Name="seriesStackPanel" Orientation="Vertical" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="6">
             <StackPanel Name="serie1StackPanel" Orientation="Horizontal"></StackPanel>

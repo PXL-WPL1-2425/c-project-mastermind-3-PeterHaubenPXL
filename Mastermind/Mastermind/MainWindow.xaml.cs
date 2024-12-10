@@ -253,7 +253,7 @@ namespace Mastermind
             attempts++;
 
             points -= 8;
-            scoreLabel.Content = $"Poging {attempts}/{chosenAttempts} Score = {points}";
+            scoreLabel.Content = $"{namePlayer} : Poging {attempts}/{chosenAttempts} Score = {points}";
 
             if (attempts < chosenAttempts)
             {
@@ -1050,7 +1050,7 @@ namespace Mastermind
                     // Gewonnen spel
 
                     attempts++;
-                    scoreLabel.Content = $"Poging {attempts}/{chosenAttempts} Score = {points}";
+                    scoreLabel.Content = $"{namePlayer} : Poging {attempts}/{chosenAttempts} Score = {points}";
                     debugStackPanel.Visibility = Visibility.Visible;
                     gameStarted = false;
                     dissolved = true;
@@ -1214,7 +1214,7 @@ namespace Mastermind
 
                     attempts++;
 
-                    scoreLabel.Content = $"Poging {attempts}/{chosenAttempts} Score = {points}";
+                    scoreLabel.Content = $"{namePlayer} : Poging {attempts}/{chosenAttempts} Score = {points}";
 
                     if (attempts < chosenAttempts)
                     {
