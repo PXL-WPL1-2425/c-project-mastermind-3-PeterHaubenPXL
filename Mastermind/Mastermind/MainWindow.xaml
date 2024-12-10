@@ -65,16 +65,16 @@
             <StackPanel Name="serie8StackPanel" Orientation="Horizontal"></StackPanel>
             <StackPanel Name="serie9StackPanel" Orientation="Horizontal"></StackPanel>
             <StackPanel Name="serie10StackPanel" Orientation="Horizontal"></StackPanel>
-            <StackPanel Name="serie11StackPanel" Orientation="Horizontal"></StackPanel>
-            <StackPanel Name="serie12StackPanel" Orientation="Horizontal"></StackPanel>
-            <StackPanel Name="serie13StackPanel" Orientation="Horizontal"></StackPanel>
-            <StackPanel Name="serie14StackPanel" Orientation="Horizontal"></StackPanel>
-            <StackPanel Name="serie15StackPanel" Orientation="Horizontal"></StackPanel>
-            <StackPanel Name="serie16StackPanel" Orientation="Horizontal"></StackPanel>
-            <StackPanel Name="serie17StackPanel" Orientation="Horizontal"></StackPanel>
-            <StackPanel Name="serie18StackPanel" Orientation="Horizontal"></StackPanel>
-            <StackPanel Name="serie19StackPanel" Orientation="Horizontal"></StackPanel>
-            <StackPanel Name="serie20StackPanel" Orientation="Horizontal"></StackPanel>
+            <StackPanel Name="serie11StackPanel" Orientation="Horizontal" Visibility="Collapsed"></StackPanel>
+            <StackPanel Name="serie12StackPanel" Orientation="Horizontal" Visibility="Collapsed"></StackPanel>
+            <StackPanel Name="serie13StackPanel" Orientation="Horizontal" Visibility="Collapsed"></StackPanel>
+            <StackPanel Name="serie14StackPanel" Orientation="Horizontal" Visibility="Collapsed"></StackPanel>
+            <StackPanel Name="serie15StackPanel" Orientation="Horizontal" Visibility="Collapsed"></StackPanel>
+            <StackPanel Name="serie16StackPanel" Orientation="Horizontal" Visibility="Collapsed"></StackPanel>
+            <StackPanel Name="serie17StackPanel" Orientation="Horizontal" Visibility="Collapsed"></StackPanel>
+            <StackPanel Name="serie18StackPanel" Orientation="Horizontal" Visibility="Collapsed"></StackPanel>
+            <StackPanel Name="serie19StackPanel" Orientation="Horizontal" Visibility="Collapsed"></StackPanel>
+            <StackPanel Name="serie20StackPanel" Orientation="Horizontal" Visibility="Collapsed"></StackPanel>
         </StackPanel>
         
         <StackPanel Name="debugStackPanel" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="6" Orientation="Horizontal" HorizontalAlignment="Center">
