@@ -31,7 +31,6 @@ namespace Mastermind
         {
             if (playerTextBox.Text.Length > 1)
             {
-                //players.Add(playerTextBox.Text);
                 this.Close();
             }
             else
@@ -41,6 +40,10 @@ namespace Mastermind
             }
         }
 
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 
 }

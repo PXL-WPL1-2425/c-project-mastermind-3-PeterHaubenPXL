@@ -29,7 +29,7 @@ namespace Mastermind
         Brush chosenColor;
 
         int attempts = 0;
-        int chosenAttempts = 10;
+        int chosenAttempts = 10; // Default
 
         int colorCode1 = 0;
         int colorCode2 = 0;
@@ -294,6 +294,7 @@ namespace Mastermind
                 // Spel einde na chosenAttempts beurten
 
                 debugStackPanel.Visibility = Visibility.Visible;
+                settingsMenuItem.IsEnabled = true;
 
                 if (playerCounter < players.Count)
                 {
@@ -303,7 +304,7 @@ namespace Mastermind
                 }
                 else
                 {
-                    MessageBoxResult result = MessageBox.Show($"You failed! De correcte code was {codeString}.\nSpelreeks ten einde\n\nWil je nog een reeks spelen?", $"{namePlayer}", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    MessageBoxResult result = MessageBox.Show($"You failed! De correcte code was {codeString}.\nSpelreeks ten einde\n\nWil je dezelfde spelreeks nog eens starten?", $"{namePlayer}", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                     if (result == MessageBoxResult.Yes)
                     {
@@ -312,7 +313,8 @@ namespace Mastermind
                     }
                     else
                     {
-                        this.Close();
+                        newGameButton.IsEnabled = true;
+                        return;
                     }
                 }
             }
@@ -384,7 +386,7 @@ namespace Mastermind
                 MessageBoxResult result = MessageBox.Show("Wil je een spel starten?", "Spel starten", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes); ;
                 if (result == MessageBoxResult.Yes)
                 {
-                    newGameButton_Click(null, null);
+                    StartGame();
                 }
                 else
                 {
@@ -433,15 +435,7 @@ namespace Mastermind
         {
             if (!gameStarted)
             {
-                MessageBoxResult result = MessageBox.Show("Wil je een spel starten?", "Spel starten", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes); ;
-                if (result == MessageBoxResult.Yes)
-                {
-                    newGameButton_Click(null, null);
-                }
-                else
-                {
-                    return;
-                }
+                return;
             }
 
             if (serie2StackPanel.Visibility == Visibility.Hidden)
@@ -489,15 +483,7 @@ namespace Mastermind
         {
             if (!gameStarted)
             {
-                MessageBoxResult result = MessageBox.Show("Wil je een spel starten?", "Spel starten", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes); ;
-                if (result == MessageBoxResult.Yes)
-                {
-                    newGameButton_Click(null, null);
-                }
-                else
-                {
-                    return;
-                }
+                return;
             }
 
             if (chosenColor == Brushes.Transparent)
@@ -564,7 +550,7 @@ namespace Mastermind
                 MessageBoxResult result = MessageBox.Show("Wil je een spel starten?", "Spel starten", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes); ;
                 if (result == MessageBoxResult.Yes)
                 {
-                    newGameButton_Click(null, null);
+                    StartGame();
                 }
                 else
                 {
@@ -795,7 +781,8 @@ namespace Mastermind
 
             if (!gameStarted)
             {
-                inputPlayers();
+                players.Clear();
+                InputPlayers();
 
                 StartGame();
             }
@@ -811,7 +798,7 @@ namespace Mastermind
                     namePlayer = player;
                     if (playerCounter < players.Count)
                     {
-                        MessageBox.Show($"{namePlayer}, klik op OK als je klaar bent voor je spel", "Ben je klaar?");
+                        MessageBox.Show($"{namePlayer}, klik op OK als je klaar bent voor je spel\n\nJe hebt {chosenAttempts} pogingen", "Ben je klaar?");
                     }
                 }
                 else if (counter > playerCounter)
@@ -829,8 +816,9 @@ namespace Mastermind
             }
             else
             {
-                newGameButton.IsEnabled = true;
-                return;
+                //newGameButton.IsEnabled = true;
+                //return;
+                int X = 0;
             }
 
             gameStarted = true;
@@ -875,32 +863,32 @@ namespace Mastermind
                 case 0:
                     debugLabel1.Background = Brushes.Red;
                     colorCode1 = 1;
-                    codeString = "Red, ";
+                    codeString = "Red ";
                     break;
                 case 1:
                     debugLabel1.Background = Brushes.Yellow;
                     colorCode1 = 2;
-                    codeString = "Yellow, ";
+                    codeString = "Yellow ";
                     break;
                 case 2:
                     debugLabel1.Background = Brushes.Orange;
                     colorCode1 = 3;
-                    codeString = "Orange, ";
+                    codeString = "Orange ";
                     break;
                 case 3:
                     debugLabel1.Background = Brushes.White;
                     colorCode1 = 4;
-                    codeString = "White, ";
+                    codeString = "White ";
                     break;
                 case 4:
                     debugLabel1.Background = Brushes.Green;
                     colorCode1 = 5;
-                    codeString = "Green, ";
+                    codeString = "Green ";
                     break;
                 case 5:
                     debugLabel1.Background = Brushes.Blue;
                     colorCode1 = 6;
-                    codeString = "Blue, ";
+                    codeString = "Blue ";
                     break;
             }
 
@@ -909,32 +897,32 @@ namespace Mastermind
                 case 0:
                     debugLabel2.Background = Brushes.Red;
                     colorCode2 = 1;
-                    codeString += "Red, ";
+                    codeString += "Red ";
                     break;
                 case 1:
                     debugLabel2.Background = Brushes.Yellow;
                     colorCode2 = 2;
-                    codeString += "Yellow, ";
+                    codeString += "Yellow ";
                     break;
                 case 2:
                     debugLabel2.Background = Brushes.Orange;
                     colorCode2 = 3;
-                    codeString += "Orange, ";
+                    codeString += "Orange ";
                     break;
                 case 3:
                     debugLabel2.Background = Brushes.White;
                     colorCode2 = 4;
-                    codeString += "White, ";
+                    codeString += "White ";
                     break;
                 case 4:
                     debugLabel2.Background = Brushes.Green;
                     colorCode2 = 5;
-                    codeString += "Green, ";
+                    codeString += "Green ";
                     break;
                 case 5:
                     debugLabel2.Background = Brushes.Blue;
                     colorCode2 = 6;
-                    codeString += "Blue, ";
+                    codeString += "Blue ";
                     break;
             }
 
@@ -943,32 +931,32 @@ namespace Mastermind
                 case 0:
                     debugLabel3.Background = Brushes.Red;
                     colorCode3 = 1;
-                    codeString += "Red, ";
+                    codeString += "Red ";
                     break;
                 case 1:
                     debugLabel3.Background = Brushes.Yellow;
                     colorCode3 = 2;
-                    codeString += "Yellow, ";
+                    codeString += "Yellow ";
                     break;
                 case 2:
                     debugLabel3.Background = Brushes.Orange;
                     colorCode3 = 3;
-                    codeString += "Orange, ";
+                    codeString += "Orange ";
                     break;
                 case 3:
                     debugLabel3.Background = Brushes.White;
                     colorCode3 = 4;
-                    codeString += "White, ";
+                    codeString += "White ";
                     break;
                 case 4:
                     debugLabel3.Background = Brushes.Green;
                     colorCode3 = 5;
-                    codeString += "Green, ";
+                    codeString += "Green ";
                     break;
                 case 5:
                     debugLabel3.Background = Brushes.Blue;
                     colorCode3 = 6;
-                    codeString += "Blue, ";
+                    codeString += "Blue ";
                     break;
             }
 
@@ -1006,74 +994,80 @@ namespace Mastermind
                     break;
             }
 
-
-            switch (colorCode5 % 6)
+            if(amount >= 5)
             {
-                case 0:
-                    debugLabel5.Background = Brushes.Red;
-                    colorCode5 = 1;
-                    codeString += "Red";
-                    break;
-                case 1:
-                    debugLabel5.Background = Brushes.Yellow;
-                    colorCode5 = 2;
-                    codeString += "Yellow";
-                    break;
-                case 2:
-                    debugLabel5.Background = Brushes.Orange;
-                    colorCode5 = 3;
-                    codeString += "Orange";
-                    break;
-                case 3:
-                    debugLabel5.Background = Brushes.White;
-                    colorCode5 = 4;
-                    codeString += "White";
-                    break;
-                case 4:
-                    debugLabel5.Background = Brushes.Green;
-                    colorCode5 = 5;
-                    codeString += "Green";
-                    break;
-                case 5:
-                    debugLabel5.Background = Brushes.Blue;
-                    colorCode5 = 6;
-                    codeString += "Blue";
-                    break;
+                switch (colorCode5 % 6)
+                {
+                    case 0:
+                        debugLabel5.Background = Brushes.Red;
+                        colorCode5 = 1;
+                        codeString += "Red";
+                        break;
+                    case 1:
+                        debugLabel5.Background = Brushes.Yellow;
+                        colorCode5 = 2;
+                        codeString += "Yellow";
+                        break;
+                    case 2:
+                        debugLabel5.Background = Brushes.Orange;
+                        colorCode5 = 3;
+                        codeString += "Orange";
+                        break;
+                    case 3:
+                        debugLabel5.Background = Brushes.White;
+                        colorCode5 = 4;
+                        codeString += "White";
+                        break;
+                    case 4:
+                        debugLabel5.Background = Brushes.Green;
+                        colorCode5 = 5;
+                        codeString += "Green";
+                        break;
+                    case 5:
+                        debugLabel5.Background = Brushes.Blue;
+                        colorCode5 = 6;
+                        codeString += "Blue";
+                        break;
+                }
             }
-
-            switch (colorCode6 % 6)
+            
+            if(amount == 6)
             {
-                case 0:
-                    debugLabel6.Background = Brushes.Red;
-                    colorCode6 = 1;
-                    codeString += "Red";
-                    break;
-                case 1:
-                    debugLabel6.Background = Brushes.Yellow;
-                    colorCode6 = 2;
-                    codeString += "Yellow";
-                    break;
-                case 2:
-                    debugLabel6.Background = Brushes.Orange;
-                    colorCode6 = 3;
-                    codeString += "Orange";
-                    break;
-                case 3:
-                    debugLabel6.Background = Brushes.White;
-                    colorCode6 = 4;
-                    codeString += "White";
-                    break;
-                case 4:
-                    debugLabel6.Background = Brushes.Green;
-                    colorCode6 = 5;
-                    codeString += "Green";
-                    break;
-                case 5:
-                    debugLabel6.Background = Brushes.Blue;
-                    colorCode6 = 6;
-                    codeString += "Blue";
-                    break;
+                switch (colorCode6 % 6)
+                {
+                    case 0:
+                        debugLabel6.Background = Brushes.Red;
+                        colorCode6 = 1;
+                        codeString += "Red";
+                        break;
+                    case 1:
+                        debugLabel6.Background = Brushes.Yellow;
+                        colorCode6 = 2;
+                        codeString += "Yellow";
+                        break;
+                    case 2:
+                        debugLabel6.Background = Brushes.Orange;
+                        colorCode6 = 3;
+                        codeString += "Orange";
+                        break;
+                    case 3:
+                        debugLabel6.Background = Brushes.White;
+                        colorCode6 = 4;
+                        codeString += "White";
+                        break;
+                    case 4:
+                        debugLabel6.Background = Brushes.Green;
+                        colorCode6 = 5;
+                        codeString += "Green";
+                        break;
+                    case 5:
+                        debugLabel6.Background = Brushes.Blue;
+                        colorCode6 = 6;
+                        codeString += "Blue";
+                        break;
+                }
             }
+            
 
             counter = 0;
 
@@ -1147,6 +1141,27 @@ namespace Mastermind
             bool color6 = false;
 
             penaltyPoints = 0;
+
+            if(amount == 4)
+            {
+                chosenColorCode5 = 1;
+                chosenColorCode6 = 1;
+                
+                debugLabel5.Visibility = Visibility.Collapsed;
+                debugLabel6.Visibility = Visibility.Collapsed;
+            }
+            else if(amount == 5)
+            {
+                chosenColorCode6 = 1;
+
+                debugLabel5.Visibility = Visibility.Visible;
+                debugLabel6.Visibility = Visibility.Collapsed;
+            }
+            else if(amount == 6)
+            {
+                debugLabel5.Visibility = Visibility.Visible;
+                debugLabel6.Visibility = Visibility.Visible;
+            }
 
             //Controle of elke positie een kleur heeft
 
@@ -1264,12 +1279,10 @@ namespace Mastermind
                     {
                         if (highScores[i] == null)
                         {
-                            highScores[i] = $"{player} - {attempts} pogingen - {points}/100";
+                            highScores[i] = $"{namePlayer} - {attempts} pogingen - {points}/100";
                             break;
                         }
                     }
-
-
 
                     if (playerCounter < players.Count)
                     {
@@ -1279,17 +1292,20 @@ namespace Mastermind
                     else
                     {
                         MessageBox.Show($"Proficiat! {namePlayer}\n\nJe hebt de code gekraakt in {attempts} pogingen\n\tmet {points} op 100", $"{namePlayer}", MessageBoxButton.OK, MessageBoxImage.Information);
-                        MessageBoxResult result = MessageBox.Show("Wil je nog een spelreeks starten?", "ToDo", MessageBoxButton.YesNo);
+                        MessageBoxResult result = MessageBox.Show("Wil je dezelfde spelreeks nog eens starten?", "Spelreeks ten einde", MessageBoxButton.YesNo);
                         if (result == MessageBoxResult.Yes)
                         {
-                            MessageBox.Show("ToDo Voorlopig dezelfde spelers", "ToDo");
+                            ChangeAttempts();
+                            
+                            //MessageBox.Show("ToDo Voorlopig dezelfde speler(s)", "ToDo");
                             playerCounter = 0;
 
                             StartGame();
                         }
                         else
                         {
-                            MessageBox.Show("ToDo PlayersList() aanpassen", "ToDo");
+                            newGameButton.IsEnabled = true;
+                            return;
                         }
                     }
                 }
@@ -1550,6 +1566,7 @@ namespace Mastermind
                         gameStarted = false;
 
                         debugStackPanel.Visibility = Visibility.Visible;
+                        settingsMenuItem.IsEnabled = true;
 
                         if (playerCounter < players.Count)
                         {
@@ -1563,7 +1580,10 @@ namespace Mastermind
 
                             if (result == MessageBoxResult.Yes)
                             {
+                                ChangeAttempts();
+
                                 playerCounter = 0;
+
                                 StartGame();
                             }
                             else
@@ -1571,9 +1591,6 @@ namespace Mastermind
                                 this.Close();
                             }
                         }
-
-
-
                     }
                 }
             }
@@ -1581,6 +1598,21 @@ namespace Mastermind
             {
                 MessageBox.Show("Maak een keuze voor alle vakken", "Keuze");
             }
+        }
+
+        private void ChangeAttempts()
+        {
+            MessageBoxResult result = MessageBox.Show($"Wil je het aantal pogingen aanpassen?\nStaat nu op {chosenAttempts}", "Aantal pogingen aanpassen?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                playerCounter = 0;
+                newGameButton.IsEnabled = true;
+                chosenAttemptsMenuItem_Click(null, null);
+                return;
+            }
+            //MessageBox.Show("ToDo Voorlopig dezelfde speler(s)", "ToDo");
+            playerCounter = 0;
         }
 
         private void ChangeBorder(int attempst, int code, int colorPositie = 0)
@@ -1603,12 +1635,12 @@ namespace Mastermind
                                     if (colorPositie == 1)
                                     {
                                         lbl.BorderBrush = Brushes.DarkRed;
-                                        lbl.ToolTip = "Rode rand: \"Juiste kleur, juiste positie\"";
+                                        lbl.ToolTip = "\"Juiste kleur, juiste positie\"";
                                     }
                                     else
                                     {
                                         lbl.BorderBrush = Brushes.Wheat;
-                                        lbl.ToolTip = "Witte rand: \"Juiste kleur, foute positie\"";
+                                        lbl.ToolTip = "\"Juiste kleur, foute positie\"";
                                     }
                                     return;
                                 }
@@ -1758,7 +1790,7 @@ namespace Mastermind
             }
         }
 
-        private void inputPlayers()
+        private void InputPlayers()
         {
             //string name = "";
             MessageBoxResult result;
@@ -1769,13 +1801,24 @@ namespace Mastermind
                 instPlayerWindow.playerTextBox.Focus();
                 instPlayerWindow.ShowDialog();
 
-                players.Add(instPlayerWindow.playerTextBox.Text);
+                if (instPlayerWindow.playerTextBox.Text.Length > 1)
+                {
+                    players.Add(instPlayerWindow.playerTextBox.Text);
+                }
 
-                result = MessageBox.Show("Wil je nog een speler toevoegen?", "Speler toevoegen", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-
+                if (players.Count < 1)
+                {
+                    MessageBox.Show("Je moet minimum 1 speler ingeven","Minimum 1 speler",MessageBoxButton.OK,MessageBoxImage.Warning);
+                    result = MessageBoxResult.Yes;
+                }
+                else
+                {
+                    result = MessageBox.Show("Wil je nog een speler toevoegen?", "Speler toevoegen", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                }
+                
             } while (result == MessageBoxResult.Yes);
 
+            playerCounter = 0;
         }
 
         private void closeGameMenuItem_Click(object sender, RoutedEventArgs e)
@@ -1809,14 +1852,20 @@ namespace Mastermind
             string temp = "";
             do
             {
-                temp = Interaction.InputBox("Aantal pogingen minimum 3, maximum 20.\nStandaard = 10", "Aantal pogingen", "", 50, 50);
+                amountWindow instAmountWindow = new amountWindow();
+
+                instAmountWindow.amountTextBox.Focus();
+                instAmountWindow.ShowDialog();
+
+                temp = instAmountWindow.amountTextBox.Text;
+
             } while (!int.TryParse(temp, out chosenAttempts) || chosenAttempts < 3 || chosenAttempts > 20);
 
         }
 
         private void newGameMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            newGameButton_Click(null, null);
+            StartGame();
         }
 
         private void hintButton_Click(object sender, RoutedEventArgs e)

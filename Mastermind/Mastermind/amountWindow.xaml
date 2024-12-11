@@ -1,11 +1,11 @@
-﻿<Window x:Class="Mastermind.playerWindow"
+﻿<Window x:Class="Mastermind.amountWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mastermind"
         mc:Ignorable="d"
-        Title="Spelers" Height="200" Width="300"
+        Title="Aantal pogingen" Height="250" Width="350"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -19,11 +19,11 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <Label Content="Geef de naam van de speler in"></Label>
-            <TextBox Name="playerTextBox" Text="" FontSize="20" HorizontalContentAlignment="Center"></TextBox>
+            <Label Content="Geef aantal pogingen in"></Label>
+            <TextBox Name="amountTextBox" Text="" FontSize="20" HorizontalContentAlignment="Center"></TextBox>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Click="cancelButton_Click" Name="cancelButton"  Padding="8" Content="Annuleren" Margin="20 20 0 0"></Button>
-                <Button IsDefault="true" Click="okeButton_Click" Name="okeButton" Content="OK" Padding="8" Width="50" Margin="20 20 0 0"></Button>
+                <Button Click="cancelAmountButton_Click" Name="cancelAmountButton"  Padding="8" Content="Annuleren" Margin="20 20 0 0"></Button>
+                <Button IsDefault="true" Click="okeAmountButton_Click" Name="okeAmountButton" Content="OK" Padding="8" Width="50" Margin="20 20 0 0"></Button>
             </StackPanel>
         </StackPanel>
     </Grid>
