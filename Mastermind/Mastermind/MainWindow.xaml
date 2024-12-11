@@ -40,7 +40,8 @@
 				<MenuItem Click="closeGameMenuItem_Click"  Header="Afsluiten" Name="closeGameMenuItem"></MenuItem>
 			</MenuItem>
 			<MenuItem Header="Instellingen" Name="settingsMenuItem">
-				<MenuItem Click="chosenattemptsMenuItem_Click" Name="chosenattemptsMenuItem" Header="Aantal pogingen"></MenuItem>
+				<MenuItem Click="chosenAttemptsMenuItem_Click" Name="chosenAttemptsMenuItem" Header="Aantal pogingen"></MenuItem>
+                <MenuItem Click="choseCountCodeMenuItem_Click" Name="choseCountCodeMenuItem" Header="Aantal code vakken"></MenuItem>
 			</MenuItem>
 		</Menu>
         <StackPanel Name="colorsStackPanel" Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="6">
@@ -85,6 +86,7 @@
             <Label Name="debugLabel3" Width="54" Height="54" Margin="10"></Label>
             <Label Name="debugLabel4" Width="54" Height="54" Margin="10"></Label>
             <Label Name="debugLabel5" Width="54" Height="54" Margin="10"></Label>
+            <Label Name="debugLabel6" Width="54" Height="54" Margin="10"></Label>
         </StackPanel>
         
     </Grid>

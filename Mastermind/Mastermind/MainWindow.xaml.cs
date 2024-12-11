@@ -3,6 +3,7 @@ using System.Diagnostics.Metrics;
 using System.Reflection;
 using System.Text;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -34,11 +35,15 @@ namespace Mastermind
         int colorCode2 = 0;
         int colorCode3 = 0;
         int colorCode4 = 0;
+        int colorCode5 = 0;
+        int colorCode6 = 0;
 
         int chosenColorCode1 = 0;
         int chosenColorCode2 = 0;
         int chosenColorCode3 = 0;
         int chosenColorCode4 = 0;
+        int chosenColorCode5 = 0;
+        int chosenColorCode6 = 0;
 
         bool dissolved = false;
         bool gameStarted = false;
@@ -62,6 +67,8 @@ namespace Mastermind
 
         string namePlayer = "";
         string nameNextPlayer = "";
+
+        int amount = 4;
 
         public MainWindow()
         {
@@ -88,15 +95,36 @@ namespace Mastermind
                 }
             }
 
-            generateLabels();
+            generateLabels(amount);
         }
 
 
-        private void generateLabels()
+        private void generateLabels(int amount)
         {
-            int amount = 5;
+            colorsStackPanel.Children.Clear();
 
-            //Textboxen genereren
+            serie1StackPanel.Children.Clear();
+            serie2StackPanel.Children.Clear();
+            serie3StackPanel.Children.Clear();
+            serie4StackPanel.Children.Clear();
+            serie5StackPanel.Children.Clear();
+            serie6StackPanel.Children.Clear();
+            serie7StackPanel.Children.Clear();
+            serie8StackPanel.Children.Clear();
+            serie9StackPanel.Children.Clear();
+            serie10StackPanel.Children.Clear();
+            serie11StackPanel.Children.Clear();
+            serie12StackPanel.Children.Clear();
+            serie13StackPanel.Children.Clear();
+            serie14StackPanel.Children.Clear();
+            serie15StackPanel.Children.Clear();
+            serie16StackPanel.Children.Clear();
+            serie17StackPanel.Children.Clear();
+            serie18StackPanel.Children.Clear();
+            serie19StackPanel.Children.Clear();
+            serie20StackPanel.Children.Clear();
+
+            //Labels genereren
             for (int i = 1; i <= 22; i++)
             {
                 if (i == 1)
@@ -144,7 +172,7 @@ namespace Mastermind
                 }
                 else if (i >= 3)
                 {
-                    for (int j = 1; j <= amount; j++)
+                    for (int j = 1; j <= amount + 1; j++)
                     {
                         Label lbl = new Label();
                         lbl.Name = $"serie{i - 2}{j - 1}";
@@ -704,6 +732,58 @@ namespace Mastermind
                         chosenColorCode4 = 6;
                     }
                     break;
+                case '5':
+                    if (chosenColor == Brushes.Red)
+                    {
+                        chosenColorCode5 = 1;
+                    }
+                    else if (chosenColor == Brushes.Yellow)
+                    {
+                        chosenColorCode5 = 2;
+                    }
+                    else if (chosenColor == Brushes.Orange)
+                    {
+                        chosenColorCode5 = 3;
+                    }
+                    else if (chosenColor == Brushes.White)
+                    {
+                        chosenColorCode5 = 4;
+                    }
+                    else if (chosenColor == Brushes.Green)
+                    {
+                        chosenColorCode5 = 5;
+                    }
+                    else if (chosenColor == Brushes.Blue)
+                    {
+                        chosenColorCode5 = 6;
+                    }
+                    break;
+                case '6':
+                    if (chosenColor == Brushes.Red)
+                    {
+                        chosenColorCode6 = 1;
+                    }
+                    else if (chosenColor == Brushes.Yellow)
+                    {
+                        chosenColorCode6 = 2;
+                    }
+                    else if (chosenColor == Brushes.Orange)
+                    {
+                        chosenColorCode6 = 3;
+                    }
+                    else if (chosenColor == Brushes.White)
+                    {
+                        chosenColorCode6 = 4;
+                    }
+                    else if (chosenColor == Brushes.Green)
+                    {
+                        chosenColorCode6 = 5;
+                    }
+                    else if (chosenColor == Brushes.Blue)
+                    {
+                        chosenColorCode6 = 6;
+                    }
+                    break;
             }
 
             chosenColor_Changed();
@@ -716,14 +796,6 @@ namespace Mastermind
             if (!gameStarted)
             {
                 inputPlayers();
-
-                //foreach (var player in players)
-                //{
-                //    namePlayer = player;
-                //    break;
-                //}
-
-                //MessageBox.Show($"{namePlayer}, klik op Oke als je klaar bent voor je spel", "Ben je klaar");
 
                 StartGame();
             }
@@ -739,7 +811,7 @@ namespace Mastermind
                     namePlayer = player;
                     if (playerCounter < players.Count)
                     {
-                        MessageBox.Show($"{namePlayer}, klik op Oke als je klaar bent voor je spel", "Ben je klaar?");
+                        MessageBox.Show($"{namePlayer}, klik op OK als je klaar bent voor je spel", "Ben je klaar?");
                     }
                 }
                 else if (counter > playerCounter)
@@ -786,11 +858,15 @@ namespace Mastermind
             colorCode2 = rnd.Next(0, 24);
             colorCode3 = rnd.Next(0, 24);
             colorCode4 = rnd.Next(0, 24);
+            colorCode5 = rnd.Next(0, 24);
+            colorCode6 = rnd.Next(0, 24);
 
             chosenColorCode1 = 0;
             chosenColorCode2 = 0;
             chosenColorCode3 = 0;
             chosenColorCode4 = 0;
+            chosenColorCode5 = 0;
+            chosenColorCode6 = 0;
 
             //chosenColor = Brushes.Transparent;
 
@@ -930,6 +1006,75 @@ namespace Mastermind
                     break;
             }
 
+
+            switch (colorCode5 % 6)
+            {
+                case 0:
+                    debugLabel5.Background = Brushes.Red;
+                    colorCode5 = 1;
+                    codeString += "Red";
+                    break;
+                case 1:
+                    debugLabel5.Background = Brushes.Yellow;
+                    colorCode5 = 2;
+                    codeString += "Yellow";
+                    break;
+                case 2:
+                    debugLabel5.Background = Brushes.Orange;
+                    colorCode5 = 3;
+                    codeString += "Orange";
+                    break;
+                case 3:
+                    debugLabel5.Background = Brushes.White;
+                    colorCode5 = 4;
+                    codeString += "White";
+                    break;
+                case 4:
+                    debugLabel5.Background = Brushes.Green;
+                    colorCode5 = 5;
+                    codeString += "Green";
+                    break;
+                case 5:
+                    debugLabel5.Background = Brushes.Blue;
+                    colorCode5 = 6;
+                    codeString += "Blue";
+                    break;
+            }
+
+            switch (colorCode6 % 6)
+            {
+                case 0:
+                    debugLabel6.Background = Brushes.Red;
+                    colorCode6 = 1;
+                    codeString += "Red";
+                    break;
+                case 1:
+                    debugLabel6.Background = Brushes.Yellow;
+                    colorCode6 = 2;
+                    codeString += "Yellow";
+                    break;
+                case 2:
+                    debugLabel6.Background = Brushes.Orange;
+                    colorCode6 = 3;
+                    codeString += "Orange";
+                    break;
+                case 3:
+                    debugLabel6.Background = Brushes.White;
+                    colorCode6 = 4;
+                    codeString += "White";
+                    break;
+                case 4:
+                    debugLabel6.Background = Brushes.Green;
+                    colorCode6 = 5;
+                    codeString += "Green";
+                    break;
+                case 5:
+                    debugLabel6.Background = Brushes.Blue;
+                    colorCode6 = 6;
+                    codeString += "Blue";
+                    break;
+            }
+
             counter = 0;
 
             foreach (var item in seriesStackPanel.Children)
@@ -991,11 +1136,15 @@ namespace Mastermind
             bool colorPosition2 = false;
             bool colorPosition3 = false;
             bool colorPosition4 = false;
+            bool colorPosition5 = false;
+            bool colorPosition6 = false;
 
             bool color1 = false;
             bool color2 = false;
             bool color3 = false;
             bool color4 = false;
+            bool color5 = false;
+            bool color6 = false;
 
             penaltyPoints = 0;
 
@@ -1004,7 +1153,9 @@ namespace Mastermind
             if (chosenColorCode1 > 0 &&
                 chosenColorCode2 > 0 &&
                 chosenColorCode3 > 0 &&
-                chosenColorCode4 > 0)
+                chosenColorCode4 > 0 &&
+                chosenColorCode5 > 0 &&
+                chosenColorCode6 > 0)
             {
                 StopCountdown();
 
@@ -1034,6 +1185,17 @@ namespace Mastermind
                     color4 = true;
                 }
 
+                if (colorCode5 == chosenColorCode5)
+                {
+                    colorPosition5 = true;
+                    color5 = true;
+                }
+                if (colorCode6 == chosenColorCode6)
+                {
+                    colorPosition6 = true;
+                    color6 = true;
+                }
+
                 if (colorPosition1 == true)
                 {
                     ChangeBorder(attempts, 1, 1);
@@ -1050,8 +1212,43 @@ namespace Mastermind
                 {
                     ChangeBorder(attempts, 4, 1);
                 }
+                if (colorPosition5 == true)
+                {
+                    ChangeBorder(attempts, 5, 1);
+                }
+                if (colorPosition6 == true)
+                {
+                    ChangeBorder(attempts, 6, 1);
+                }
 
-                if (colorPosition1 && colorPosition2 && colorPosition3 && colorPosition4)
+                if (amount >= 5)
+                {
+                    if (colorPosition5 == true)
+                    {
+                        ChangeBorder(attempts, 5, 1);
+                    }
+                }
+                else
+                {
+                    colorPosition5 = true;
+                    color5= true;
+                }
+
+                if(amount == 6)
+                {
+                    if (colorPosition6 == true)
+                    {
+                        ChangeBorder(attempts, 6, 1);
+                    }
+                }
+                else
+                {
+                    colorPosition6 = true;
+                    color6 = true;
+                }
+                
+
+                if (colorPosition1 && colorPosition2 && colorPosition3 && colorPosition4 && colorPosition5 && colorPosition6)
                 {
                     // Gewonnen spel
 
@@ -1117,6 +1314,16 @@ namespace Mastermind
                             ChangeBorder(attempts, 1);
                             color4 = true;
                         }
+                        else if (chosenColorCode1 == colorCode5 && color5 == false)
+                        {
+                            ChangeBorder(attempts, 1);
+                            color3 = true;
+                        }
+                        else if (chosenColorCode1 == colorCode6 && color6 == false)
+                        {
+                            ChangeBorder(attempts, 1);
+                            color3 = true;
+                        }
                     }
 
                     if (colorPosition2 == false)
@@ -1135,6 +1342,16 @@ namespace Mastermind
                         {
                             ChangeBorder(attempts, 2);
                             color4 = true;
+                        }
+                        else if (chosenColorCode2 == colorCode5 && color5 == false)
+                        {
+                            ChangeBorder(attempts, 2);
+                            color3 = true;
+                        }
+                        else if (chosenColorCode2 == colorCode6 && color6 == false)
+                        {
+                            ChangeBorder(attempts, 2);
+                            color3 = true;
                         }
                     }
 
@@ -1155,6 +1372,16 @@ namespace Mastermind
                             ChangeBorder(attempts, 3);
                             color4 = true;
                         }
+                        else if (chosenColorCode3 == colorCode5 && color5 == false)
+                        {
+                            ChangeBorder(attempts, 3);
+                            color3 = true;
+                        }
+                        else if (chosenColorCode3 == colorCode6 && color6 == false)
+                        {
+                            ChangeBorder(attempts, 3);
+                            color3 = true;
+                        }
                     }
 
                     if (colorPosition4 == false)
@@ -1172,6 +1399,74 @@ namespace Mastermind
                         else if (chosenColorCode4 == colorCode3 && color3 == false)
                         {
                             ChangeBorder(attempts, 4);
+                            color3 = true;
+                        }
+                        else if (chosenColorCode4 == colorCode5 && color5 == false)
+                        {
+                            ChangeBorder(attempts, 4);
+                            color3 = true;
+                        }
+                        else if (chosenColorCode4 == colorCode6 && color6 == false)
+                        {
+                            ChangeBorder(attempts, 4);
+                            color3 = true;
+                        }
+                    }
+
+                    if (colorPosition5 == false)
+                    {
+                        if (chosenColorCode5 == colorCode1 && color1 == false)
+                        {
+                            ChangeBorder(attempts, 5);
+                            color1 = true;
+                        }
+                        else if (chosenColorCode5 == colorCode2 && color2 == false)
+                        {
+                            ChangeBorder(attempts, 5);
+                            color2 = true;
+                        }
+                        else if (chosenColorCode5 == colorCode3 && color3 == false)
+                        {
+                            ChangeBorder(attempts, 5);
+                            color3 = true;
+                        }
+                        else if (chosenColorCode5 == colorCode4 && color4 == false)
+                        {
+                            ChangeBorder(attempts, 5);
+                            color3 = true;
+                        }
+                        else if (chosenColorCode5 == colorCode6 && color6 == false)
+                        {
+                            ChangeBorder(attempts, 5);
+                            color3 = true;
+                        }
+                    }
+
+                    if (colorPosition6 == false)
+                    {
+                        if (chosenColorCode6 == colorCode1 && color1 == false)
+                        {
+                            ChangeBorder(attempts, 6);
+                            color1 = true;
+                        }
+                        else if (chosenColorCode6 == colorCode2 && color2 == false)
+                        {
+                            ChangeBorder(attempts, 6);
+                            color2 = true;
+                        }
+                        else if (chosenColorCode6 == colorCode3 && color3 == false)
+                        {
+                            ChangeBorder(attempts, 6);
+                            color3 = true;
+                        }
+                        else if (chosenColorCode6 == colorCode4 && color4 == false)
+                        {
+                            ChangeBorder(attempts, 6);
+                            color3 = true;
+                        }
+                        else if (chosenColorCode6 == colorCode5 && color5 == false)
+                        {
+                            ChangeBorder(attempts, 6);
                             color3 = true;
                         }
                     }
@@ -1196,6 +1491,16 @@ namespace Mastermind
                         penaltyPoints++;
                     }
 
+                    if (color5 && !colorPosition5)
+                    {
+                        penaltyPoints++;
+                    }
+
+                    if (color6 && !colorPosition6)
+                    {
+                        penaltyPoints++;
+                    }
+
                     if (!color1)
                     {
                         penaltyPoints += 2;
@@ -1212,6 +1517,16 @@ namespace Mastermind
                     }
 
                     if (!color4)
+                    {
+                        penaltyPoints += 2;
+                    }
+
+                    if (!color5)
+                    {
+                        penaltyPoints += 2;
+                    }
+
+                    if (!color6)
                     {
                         penaltyPoints += 2;
                     }
@@ -1313,6 +1628,8 @@ namespace Mastermind
             chosenColorCode2 = 0;
             chosenColorCode3 = 0;
             chosenColorCode4 = 0;
+            chosenColorCode5 = 0;
+            chosenColorCode6 = 0;
 
             switch (attempts)
             {
@@ -1484,7 +1801,7 @@ namespace Mastermind
             MessageBox.Show(highScoresString, "Mastermind highscores");
         }
 
-        private void chosenattemptsMenuItem_Click(object sender, RoutedEventArgs e)
+        private void chosenAttemptsMenuItem_Click(object sender, RoutedEventArgs e)
         {
             // ToDo Enkel ingave van cijfers toestaan
             // Gaat niet met InputBox, Nieuw window met - ShowModal -
@@ -1505,6 +1822,17 @@ namespace Mastermind
         private void hintButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+
+        private void choseCountCodeMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            do
+            {
+                int.TryParse(Interaction.InputBox("Hoeveel code vakken wil je? 4, 5 of 6", "Code vakken", "4", 20, 20), out amount);
+            } while (amount < 4 || amount > 6);
+
+            generateLabels(amount);
         }
     }
 }
