@@ -1,0 +1,44 @@
+﻿<Window x:Class="Mastermind.hintWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mastermind"
+        mc:Ignorable="d"
+        Title="hintWindow" Height="450" Width="520"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        Background="Black">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
+            <Label FontSize="24" Content="Wat voor hint wil je?" HorizontalContentAlignment="Center" Background="White"></Label>
+            <RadioButton Foreground="White" Name="positionRadioButton" Checked="RadioButton_Checked" FontSize="20" HorizontalAlignment="Center" Content="Kleur op de juiste plaats : 25 Strafpunten" Padding="5" VerticalContentAlignment="Center" Margin="0 10"></RadioButton>
+            <StackPanel Orientation="Horizontal">
+                <Label Background="DarkGray" Name="hint1Label" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
+                <Label Background="DarkGray" Name="hint2Label" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
+                <Label Background="DarkGray" Name="hint3Label" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
+                <Label Background="DarkGray" Name="hint4Label" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
+                <Label Background="DarkGray" Name="hint5Label" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
+                <Label Background="DarkGray" Name="hint6Label" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
+            </StackPanel>
+            <RadioButton Foreground="White" Name="colorRadioButton" Checked="RadioButton_Checked" FontSize="20" HorizontalAlignment="Center" Content="Gebruikte kleur : 15 Strafpunten" Padding="5" VerticalContentAlignment="Center" Margin="0 30 0 10"></RadioButton>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Background="DarkGray" Name="hintColorLabel" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Click="closelHintButton_Click" Name="closeHintButton" Content="Sluiten" Padding="8" Margin="40 20" Width="80"></Button>
+                <Button Click="okHintButton_Click" Name="okHintButton" Content="OK" Padding="8" Margin="0 20 40 20" Width="80"></Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

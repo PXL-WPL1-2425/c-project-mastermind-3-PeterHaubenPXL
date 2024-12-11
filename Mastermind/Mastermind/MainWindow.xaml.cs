@@ -68,7 +68,7 @@ namespace Mastermind
         string namePlayer = "";
         string nameNextPlayer = "";
 
-        int amount = 4;
+        public int amount = 4;
 
         public MainWindow()
         {
@@ -85,7 +85,9 @@ namespace Mastermind
             timer.Tick += Timer_Tick;
 
             debugStackPanel.Visibility = Visibility.Hidden;
-            debugStackPanel.HorizontalAlignment = HorizontalAlignment.Center;
+            //debugStackPanel.HorizontalAlignment = HorizontalAlignment.Center;
+
+            hintButton.Visibility = Visibility.Collapsed;
 
             foreach (var item in seriesStackPanel.Children)
             {
@@ -351,6 +353,7 @@ namespace Mastermind
                                 lbl.Background = Brushes.DarkGray;
                                 lbl.BorderBrush = Brushes.Transparent;
                                 lbl.ToolTip = null;
+                                hintButton.Visibility = Visibility.Collapsed;
                             }
                         }
                         counter++;
@@ -791,6 +794,9 @@ namespace Mastermind
         private void StartGame()
         {
             int counter = 0;
+
+            hintButton.Visibility = Visibility.Collapsed;
+
             foreach (var player in players)
             {
                 if (counter == playerCounter)
@@ -1142,7 +1148,14 @@ namespace Mastermind
 
             penaltyPoints = 0;
 
-            if(amount == 4)
+            if (!gameStarted)
+            {
+                return;
+            }
+
+            hintButton.Visibility = Visibility.Visible;
+
+            if (amount == 4)
             {
                 chosenColorCode5 = 1;
                 chosenColorCode6 = 1;
@@ -1588,7 +1601,8 @@ namespace Mastermind
                             }
                             else
                             {
-                                this.Close();
+                                return;
+                                //this.Close();
                             }
                         }
                     }
@@ -1667,6 +1681,7 @@ namespace Mastermind
             {
                 case 1:
                     serie2StackPanel.Visibility = Visibility.Visible;
+                    hintButton.Visibility = Visibility.Visible;
                     break;
                 case 2:
                     serie3StackPanel.Visibility = Visibility.Visible;
@@ -1870,7 +1885,40 @@ namespace Mastermind
 
         private void hintButton_Click(object sender, RoutedEventArgs e)
         {
+            StopCountdown();
 
+            penaltyPoints = 0;
+
+            hintWindow instHint = new hintWindow();
+            instHint.ShowDialog();
+
+            if (instHint.hintColorLabel.Background != Brushes.DarkGray && instHint.colorRadioButton.IsChecked == true)
+            {
+                penaltyPoints = 15;
+
+                points -= penaltyPoints;
+
+                scoreLabel.Content = $"{namePlayer} : Poging {attempts}/{chosenAttempts} Score = {points}";
+            }
+
+            if(instHint.positionRadioButton.IsChecked == true && (instHint.hint1Label.Background != Brushes.DarkGray ||
+                                                                  instHint.hint2Label.Background != Brushes.DarkGray ||
+                                                                  instHint.hint3Label.Background != Brushes.DarkGray ||
+                                                                  instHint.hint4Label.Background != Brushes.DarkGray ||
+                                                                  instHint.hint5Label.Background != Brushes.DarkGray ||
+                                                                  instHint.hint6Label.Background != Brushes.DarkGray))
+            {
+                penaltyPoints = 25;
+
+                points -= penaltyPoints;
+
+                scoreLabel.Content = $"{namePlayer} : Poging {attempts}/{chosenAttempts} Score = {points}";
+            }
+
+            if (debugStackPanel.Visibility == Visibility.Hidden)
+            {
+                StartCountdown();
+            }
         }
 
 
