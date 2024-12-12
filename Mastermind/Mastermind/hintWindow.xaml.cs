@@ -46,104 +46,24 @@ namespace Mastermind
             {
                 if (list[i].Visibility == Visibility.Visible)
                 {
+                    counter = 0;
                     foreach (var item in list[i - 1].Children)
                     {
-                        if (item is Label lbl)
+                        if(counter >= 1) // counter 0 = serieLabel
                         {
-                            if (lbl.Background != Brushes.DarkGray)
+                            if (item is Label lbl)
                             {
-                                if (lbl.Background == Brushes.Red)
+                                if (lbl.BorderBrush == Brushes.DarkRed)
                                 {
-                                    if (colorCodes.Contains(1))
-                                    {
-                                        for (int j = 0; j < colorCodes.Length; j++)
-                                        {
-                                            if (colorCodes[j] == 1)
-                                            {
-                                                colorCodes[j] = 0;
-                                                break;
-                                            }
-                                        }
-                                    }
+                                    colorCodes[counter - 1] = 0;
                                 }
-                                else if (lbl.Background == Brushes.Yellow)
+                                else if (lbl.BorderBrush == Brushes.Wheat)
                                 {
-                                    if (colorCodes.Contains(2))
-                                    {
-                                        for (int j = 0; j < colorCodes.Length; j++)
-                                        {
-                                            if (colorCodes[j] == 2)
-                                            {
-                                                colorCodes[j] = 0;
-                                                break;
-                                            }
-                                        }
-                                    }
+                                    int X = 0;
                                 }
-                                else if (lbl.Background == Brushes.Orange)
-                                {
-                                    if (colorCodes.Contains(3))
-                                    {
-                                        for (int j = 0; j < colorCodes.Length; j++)
-                                        {
-                                            if (colorCodes[j] == 3)
-                                            {
-                                                colorCodes[j] = 0;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
-                                else if (lbl.Background == Brushes.White)
-                                {
-                                    if (colorCodes.Contains(4))
-                                    {
-                                        for (int j = 0; j < colorCodes.Length; j++)
-                                        {
-                                            if (colorCodes[j] == 4)
-                                            {
-                                                colorCodes[j] = 0;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
-                                else if (lbl.Background == Brushes.Green)
-                                {
-                                    if (colorCodes.Contains(5))
-                                    {
-                                        for (int j = 0; j < colorCodes.Length; j++)
-                                        {
-                                            if (colorCodes[j] == 5)
-                                            {
-                                                colorCodes[j] = 0;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
-                                else if (lbl.Background == Brushes.Blue)
-                                {
-                                    if (colorCodes.Contains(6))
-                                    {
-                                        for (int j = 0; j < colorCodes.Length; j++)
-                                        {
-                                            if (colorCodes[j] == 6)
-                                            {
-                                                colorCodes[j] = 0;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            else //lbl.Backgound = Brushes DarkGray
-                            {
-                                break;
-                                lbl.Name = lbl.Name;
                             }
                         }
-                        //break;
+                        counter++;                        
                     }
 
                     bool seen = false;
@@ -348,8 +268,10 @@ namespace Mastermind
                             seen = true;
                             break;
                     }
+
                     if (seen == true)
                     {
+                        okHintButton.IsEnabled = false;
                         return;
                     }
                 }
@@ -417,7 +339,7 @@ namespace Mastermind
                 }
                 counter++;
             }
-            int X = 0;
+            okHintButton.IsEnabled = false;
         }
 
     }
