@@ -49,7 +49,7 @@ namespace Mastermind
                     counter = 0;
                     foreach (var item in list[i - 1].Children)
                     {
-                        if(counter >= 1) // counter 0 = serieLabel
+                        if (counter >= 1) // counter 0 = serieLabel
                         {
                             if (item is Label lbl)
                             {
@@ -57,224 +57,323 @@ namespace Mastermind
                                 {
                                     colorCodes[counter - 1] = 0;
                                 }
-                                else if (lbl.BorderBrush == Brushes.Wheat)
-                                {
-                                    int X = 0;
-                                }
                             }
                         }
-                        counter++;                        
+                        counter++;
                     }
 
-                    bool seen = false;
-
-                    Random rnd = new Random();
-                    int random;
-
-                    do
+                    if (colorRadioButton.IsChecked == true)
                     {
-                        random = rnd.Next(0, colorCodes.Length);
-                    } while (colorCodes[random] == 0);
-
-
-                    switch (colorCodes[random])
-                    {
-                        case 1:
-                            if (colorRadioButton.IsChecked == true)
+                        counter = 0;
+                        foreach (var item in list[i - 1].Children)
+                        {
+                            if (counter >= 1) // counter 0 = serieLabel
                             {
-                                hintColorLabel.Background = Brushes.Red;
-                                seen = true;
-                                break;
-                            }
-                            else   // positionRadioButton.IsChecked = true;
-                            {
-                                switch (random)
+                                if (item is Label lbl)
                                 {
-                                    case 0:
-                                        hint1Label.Background = Brushes.Red;
-                                        seen = true; break;
-                                    case 1:
-                                        hint2Label.Background = Brushes.Red;
-                                        seen = true; break;
-                                    case 2:
-                                        hint3Label.Background = Brushes.Red;
-                                        seen = true; break;
-                                    case 3:
-                                        hint4Label.Background = Brushes.Red;
-                                        seen = true; break;
-                                    case 4:
-                                        hint5Label.Background = Brushes.Red;
-                                        seen = true; break;
-                                    case 5:
-                                        hint6Label.Background = Brushes.Red;
-                                        seen = true; break;
+                                    if (lbl.BorderBrush == Brushes.Wheat)
+                                    {
+                                        if (lbl.Background == Brushes.Red)
+                                        {
+                                            if (colorCodes.Contains(1))
+                                            {
+                                                for (int j = 0; j < colorCodes.Length; j++)
+                                                {
+                                                    if (colorCodes[j] == 1)
+                                                    {
+                                                        colorCodes[j] = 0;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else if (lbl.Background == Brushes.Yellow)
+                                        {
+                                            if (colorCodes.Contains(2))
+                                            {
+                                                for (int j = 0; j < colorCodes.Length; j++)
+                                                {
+                                                    if (colorCodes[j] == 2)
+                                                    {
+                                                        colorCodes[j] = 0;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else if (lbl.Background == Brushes.Orange)
+                                        {
+                                            if (colorCodes.Contains(3))
+                                            {
+                                                for (int j = 0; j < colorCodes.Length; j++)
+                                                {
+                                                    if (colorCodes[j] == 3)
+                                                    {
+                                                        colorCodes[j] = 0;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else if (lbl.Background == Brushes.White)
+                                        {
+                                            if (colorCodes.Contains(4))
+                                            {
+                                                for (int j = 0; j < colorCodes.Length; j++)
+                                                {
+                                                    if (colorCodes[j] == 4)
+                                                    {
+                                                        colorCodes[j] = 0;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else if (lbl.Background == Brushes.Green)
+                                        {
+                                            if (colorCodes.Contains(5))
+                                            {
+                                                for (int j = 0; j < colorCodes.Length; j++)
+                                                {
+                                                    if (colorCodes[j] == 5)
+                                                    {
+                                                        colorCodes[j] = 0;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else if (lbl.Background == Brushes.Blue)
+                                        {
+                                            if (colorCodes.Contains(6))
+                                            {
+                                                for (int j = 0; j < colorCodes.Length; j++)
+                                                {
+                                                    if (colorCodes[j] == 6)
+                                                    {
+                                                        colorCodes[j] = 0;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
-                            break;
-
-                        case 2:
-                            if (colorRadioButton.IsChecked == true)
-                            {
-                                hintColorLabel.Background = Brushes.Yellow;
-                            }
-                            else
-                            {
-                                switch (random)
-                                {
-                                    case 0:
-                                        hint1Label.Background = Brushes.Yellow;
-                                        seen = true; break;
-                                    case 1:
-                                        hint2Label.Background = Brushes.Yellow;
-                                        seen = true; break;
-                                    case 2:
-                                        hint3Label.Background = Brushes.Yellow;
-                                        seen = true; break;
-                                    case 3:
-                                        hint4Label.Background = Brushes.Yellow;
-                                        seen = true; break;
-                                    case 4:
-                                        hint5Label.Background = Brushes.Yellow;
-                                        seen = true; break;
-                                    case 5:
-                                        hint6Label.Background = Brushes.Yellow;
-                                        seen = true; break;
-                                }
-                            }
-                            seen = true;
-                            break;
-                        case 3:
-                            if (colorRadioButton.IsChecked == true)
-                            {
-                                hintColorLabel.Background = Brushes.Orange;
-                            }
-                            else
-                            {
-                                switch (random)
-                                {
-                                    case 0:
-                                        hint1Label.Background = Brushes.Orange;
-                                        seen = true; break;
-                                    case 1:
-                                        hint2Label.Background = Brushes.Orange;
-                                        seen = true; break;
-                                    case 2:
-                                        hint3Label.Background = Brushes.Orange;
-                                        seen = true; break;
-                                    case 3:
-                                        hint4Label.Background = Brushes.Orange;
-                                        seen = true; break;
-                                    case 4:
-                                        hint5Label.Background = Brushes.Orange;
-                                        seen = true; break;
-                                    case 5:
-                                        hint6Label.Background = Brushes.Orange;
-                                        seen = true; break;
-                                }
-                            }
-                            seen = true;
-                            break;
-                        case 4:
-                            if (colorRadioButton.IsChecked == true)
-                            {
-                                hintColorLabel.Background = Brushes.White;
-                            }
-                            else
-                            {
-                                switch (random)
-                                {
-                                    case 0:
-                                        hint1Label.Background = Brushes.White;
-                                        seen = true; break;
-                                    case 1:
-                                        hint2Label.Background = Brushes.White;
-                                        seen = true; break;
-                                    case 2:
-                                        hint3Label.Background = Brushes.White;
-                                        seen = true; break;
-                                    case 3:
-                                        hint4Label.Background = Brushes.White;
-                                        seen = true; break;
-                                    case 4:
-                                        hint5Label.Background = Brushes.White;
-                                        seen = true; break;
-                                    case 5:
-                                        hint6Label.Background = Brushes.White;
-                                        seen = true; break;
-                                }
-                            }
-                            seen = true;
-                            break;
-                        case 5:
-                            if (colorRadioButton.IsChecked == true)
-                            {
-                                hintColorLabel.Background = Brushes.Green;
-                            }
-                            else
-                            {
-                                switch (random)
-                                {
-                                    case 0:
-                                        hint1Label.Background = Brushes.Green;
-                                        seen = true; break;
-                                    case 1:
-                                        hint2Label.Background = Brushes.Green;
-                                        seen = true; break;
-                                    case 2:
-                                        hint3Label.Background = Brushes.Green;
-                                        seen = true; break;
-                                    case 3:
-                                        hint4Label.Background = Brushes.Green;
-                                        seen = true; break;
-                                    case 4:
-                                        hint5Label.Background = Brushes.Green;
-                                        seen = true; break;
-                                    case 5:
-                                        hint6Label.Background = Brushes.Green;
-                                        seen = true; break;
-                                }
-                            }
-                            seen = true;
-                            break;
-                        case 6:
-                            if (colorRadioButton.IsChecked == true)
-                            {
-                                hintColorLabel.Background = Brushes.Blue;
-                            }
-                            else
-                            {
-                                switch (random)
-                                {
-                                    case 0:
-                                        hint1Label.Background = Brushes.Blue;
-                                        seen = true; break;
-                                    case 1:
-                                        hint2Label.Background = Brushes.Blue;
-                                        seen = true; break;
-                                    case 2:
-                                        hint3Label.Background = Brushes.Blue;
-                                        seen = true; break;
-                                    case 3:
-                                        hint4Label.Background = Brushes.Blue;
-                                        seen = true; break;
-                                    case 4:
-                                        hint5Label.Background = Brushes.Blue;
-                                        seen = true; break;
-                                    case 5:
-                                        hint6Label.Background = Brushes.Blue;
-                                        seen = true; break;
-                                }
-                            }
-                            seen = true;
-                            break;
-                    }
-
-                    if (seen == true)
-                    {
-                        okHintButton.IsEnabled = false;
-                        return;
+                            counter++;
+                        }
                     }
                 }
+            }
+
+            bool seen = false;
+
+            Random rnd = new Random();
+            int random;
+
+            do
+            {
+                random = rnd.Next(0, colorCodes.Length);
+            } while (colorCodes[random] == 0);
+
+
+            switch (colorCodes[random])
+            {
+                case 1:
+                    if (colorRadioButton.IsChecked == true)
+                    {
+                        hintColorLabel.Background = Brushes.Red;
+                        seen = true;
+                        break;
+                    }
+                    else   // positionRadioButton.IsChecked = true;
+                    {
+                        switch (random)
+                        {
+                            case 0:
+                                hint1Label.Background = Brushes.Red;
+                                seen = true; break;
+                            case 1:
+                                hint2Label.Background = Brushes.Red;
+                                seen = true; break;
+                            case 2:
+                                hint3Label.Background = Brushes.Red;
+                                seen = true; break;
+                            case 3:
+                                hint4Label.Background = Brushes.Red;
+                                seen = true; break;
+                            case 4:
+                                hint5Label.Background = Brushes.Red;
+                                seen = true; break;
+                            case 5:
+                                hint6Label.Background = Brushes.Red;
+                                seen = true; break;
+                        }
+                    }
+                    break;
+
+                case 2:
+                    if (colorRadioButton.IsChecked == true)
+                    {
+                        hintColorLabel.Background = Brushes.Yellow;
+                    }
+                    else
+                    {
+                        switch (random)
+                        {
+                            case 0:
+                                hint1Label.Background = Brushes.Yellow;
+                                seen = true; break;
+                            case 1:
+                                hint2Label.Background = Brushes.Yellow;
+                                seen = true; break;
+                            case 2:
+                                hint3Label.Background = Brushes.Yellow;
+                                seen = true; break;
+                            case 3:
+                                hint4Label.Background = Brushes.Yellow;
+                                seen = true; break;
+                            case 4:
+                                hint5Label.Background = Brushes.Yellow;
+                                seen = true; break;
+                            case 5:
+                                hint6Label.Background = Brushes.Yellow;
+                                seen = true; break;
+                        }
+                    }
+                    seen = true;
+                    break;
+                case 3:
+                    if (colorRadioButton.IsChecked == true)
+                    {
+                        hintColorLabel.Background = Brushes.Orange;
+                    }
+                    else
+                    {
+                        switch (random)
+                        {
+                            case 0:
+                                hint1Label.Background = Brushes.Orange;
+                                seen = true; break;
+                            case 1:
+                                hint2Label.Background = Brushes.Orange;
+                                seen = true; break;
+                            case 2:
+                                hint3Label.Background = Brushes.Orange;
+                                seen = true; break;
+                            case 3:
+                                hint4Label.Background = Brushes.Orange;
+                                seen = true; break;
+                            case 4:
+                                hint5Label.Background = Brushes.Orange;
+                                seen = true; break;
+                            case 5:
+                                hint6Label.Background = Brushes.Orange;
+                                seen = true; break;
+                        }
+                    }
+                    seen = true;
+                    break;
+                case 4:
+                    if (colorRadioButton.IsChecked == true)
+                    {
+                        hintColorLabel.Background = Brushes.White;
+                    }
+                    else
+                    {
+                        switch (random)
+                        {
+                            case 0:
+                                hint1Label.Background = Brushes.White;
+                                seen = true; break;
+                            case 1:
+                                hint2Label.Background = Brushes.White;
+                                seen = true; break;
+                            case 2:
+                                hint3Label.Background = Brushes.White;
+                                seen = true; break;
+                            case 3:
+                                hint4Label.Background = Brushes.White;
+                                seen = true; break;
+                            case 4:
+                                hint5Label.Background = Brushes.White;
+                                seen = true; break;
+                            case 5:
+                                hint6Label.Background = Brushes.White;
+                                seen = true; break;
+                        }
+                    }
+                    seen = true;
+                    break;
+                case 5:
+                    if (colorRadioButton.IsChecked == true)
+                    {
+                        hintColorLabel.Background = Brushes.Green;
+                    }
+                    else
+                    {
+                        switch (random)
+                        {
+                            case 0:
+                                hint1Label.Background = Brushes.Green;
+                                seen = true; break;
+                            case 1:
+                                hint2Label.Background = Brushes.Green;
+                                seen = true; break;
+                            case 2:
+                                hint3Label.Background = Brushes.Green;
+                                seen = true; break;
+                            case 3:
+                                hint4Label.Background = Brushes.Green;
+                                seen = true; break;
+                            case 4:
+                                hint5Label.Background = Brushes.Green;
+                                seen = true; break;
+                            case 5:
+                                hint6Label.Background = Brushes.Green;
+                                seen = true; break;
+                        }
+                    }
+                    seen = true;
+                    break;
+                case 6:
+                    if (colorRadioButton.IsChecked == true)
+                    {
+                        hintColorLabel.Background = Brushes.Blue;
+                    }
+                    else
+                    {
+                        switch (random)
+                        {
+                            case 0:
+                                hint1Label.Background = Brushes.Blue;
+                                seen = true; break;
+                            case 1:
+                                hint2Label.Background = Brushes.Blue;
+                                seen = true; break;
+                            case 2:
+                                hint3Label.Background = Brushes.Blue;
+                                seen = true; break;
+                            case 3:
+                                hint4Label.Background = Brushes.Blue;
+                                seen = true; break;
+                            case 4:
+                                hint5Label.Background = Brushes.Blue;
+                                seen = true; break;
+                            case 5:
+                                hint6Label.Background = Brushes.Blue;
+                                seen = true; break;
+                        }
+                    }
+                    seen = true;
+                    break;
+            }
+
+            if (seen == true)
+            {
+                colorCodes = colorCodes;
+                okHintButton.IsEnabled = false;
+                return;
             }
         }
 

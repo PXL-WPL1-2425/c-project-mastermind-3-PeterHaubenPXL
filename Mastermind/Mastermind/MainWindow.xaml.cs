@@ -353,7 +353,7 @@ namespace Mastermind
                                 lbl.Background = Brushes.DarkGray;
                                 lbl.BorderBrush = Brushes.Transparent;
                                 lbl.ToolTip = null;
-                                hintButton.Visibility = Visibility.Collapsed;
+                                hintButton.IsEnabled = false ;
                             }
                         }
                         counter++;
@@ -795,7 +795,7 @@ namespace Mastermind
         {
             int counter = 0;
 
-            hintButton.Visibility = Visibility.Collapsed;
+            hintButton.IsEnabled=false;
 
             foreach (var player in players)
             {
@@ -1153,7 +1153,7 @@ namespace Mastermind
                 return;
             }
 
-            hintButton.Visibility = Visibility.Visible;
+            hintButton.IsEnabled = true;
 
             if (amount == 4)
             {
@@ -1262,7 +1262,7 @@ namespace Mastermind
                     color5= true;
                 }
 
-                if(amount == 6)
+                if(amount >= 6)
                 {
                     if (colorPosition6 == true)
                     {
@@ -1346,12 +1346,12 @@ namespace Mastermind
                         else if (chosenColorCode1 == colorCode5 && color5 == false)
                         {
                             ChangeBorder(attempts, 1);
-                            color3 = true;
+                            color5 = true;
                         }
                         else if (chosenColorCode1 == colorCode6 && color6 == false)
                         {
                             ChangeBorder(attempts, 1);
-                            color3 = true;
+                            color6 = true;
                         }
                     }
 
@@ -1375,12 +1375,12 @@ namespace Mastermind
                         else if (chosenColorCode2 == colorCode5 && color5 == false)
                         {
                             ChangeBorder(attempts, 2);
-                            color3 = true;
+                            color5 = true;
                         }
                         else if (chosenColorCode2 == colorCode6 && color6 == false)
                         {
                             ChangeBorder(attempts, 2);
-                            color3 = true;
+                            color6 = true;
                         }
                     }
 
@@ -1404,12 +1404,12 @@ namespace Mastermind
                         else if (chosenColorCode3 == colorCode5 && color5 == false)
                         {
                             ChangeBorder(attempts, 3);
-                            color3 = true;
+                            color5 = true;
                         }
                         else if (chosenColorCode3 == colorCode6 && color6 == false)
                         {
                             ChangeBorder(attempts, 3);
-                            color3 = true;
+                            color6 = true;
                         }
                     }
 
@@ -1433,12 +1433,12 @@ namespace Mastermind
                         else if (chosenColorCode4 == colorCode5 && color5 == false)
                         {
                             ChangeBorder(attempts, 4);
-                            color3 = true;
+                            color5 = true;
                         }
                         else if (chosenColorCode4 == colorCode6 && color6 == false)
                         {
                             ChangeBorder(attempts, 4);
-                            color3 = true;
+                            color6 = true;
                         }
                     }
 
@@ -1462,12 +1462,12 @@ namespace Mastermind
                         else if (chosenColorCode5 == colorCode4 && color4 == false)
                         {
                             ChangeBorder(attempts, 5);
-                            color3 = true;
+                            color4 = true;
                         }
                         else if (chosenColorCode5 == colorCode6 && color6 == false)
                         {
                             ChangeBorder(attempts, 5);
-                            color3 = true;
+                            color6 = true;
                         }
                     }
 
@@ -1491,12 +1491,12 @@ namespace Mastermind
                         else if (chosenColorCode6 == colorCode4 && color4 == false)
                         {
                             ChangeBorder(attempts, 6);
-                            color3 = true;
+                            color4 = true;
                         }
                         else if (chosenColorCode6 == colorCode5 && color5 == false)
                         {
                             ChangeBorder(attempts, 6);
-                            color3 = true;
+                            color5 = true;
                         }
                     }
 
@@ -1899,6 +1899,8 @@ namespace Mastermind
                 points -= penaltyPoints;
 
                 scoreLabel.Content = $"{namePlayer} : Poging {attempts}/{chosenAttempts} Score = {points}";
+
+                hintButton.IsEnabled = false;
             }
 
             if(instHint.positionRadioButton.IsChecked == true && (instHint.hint1Label.Background != Brushes.DarkGray ||
@@ -1913,6 +1915,8 @@ namespace Mastermind
                 points -= penaltyPoints;
 
                 scoreLabel.Content = $"{namePlayer} : Poging {attempts}/{chosenAttempts} Score = {points}";
+
+                hintButton.IsEnabled = false;
             }
 
             if (debugStackPanel.Visibility == Visibility.Hidden)
