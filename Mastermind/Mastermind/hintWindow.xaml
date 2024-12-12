@@ -23,13 +23,13 @@
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
             <Label FontSize="24" Content="Wat voor hint wil je?" HorizontalContentAlignment="Center" Background="White"></Label>
             <RadioButton Foreground="White" Name="positionRadioButton" Checked="RadioButton_Checked" FontSize="20" HorizontalAlignment="Center" Content="Kleur op de juiste plaats : 25 Strafpunten" Padding="5" VerticalContentAlignment="Center" Margin="0 10"></RadioButton>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Label Background="DarkGray" Name="hint1Label" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
                 <Label Background="DarkGray" Name="hint2Label" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
                 <Label Background="DarkGray" Name="hint3Label" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
                 <Label Background="DarkGray" Name="hint4Label" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
-                <Label Background="DarkGray" Name="hint5Label" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
-                <Label Background="DarkGray" Name="hint6Label" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
+                <Label Visibility="Collapsed" Background="DarkGray" Name="hint5Label" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
+                <Label Visibility="Collapsed" Background="DarkGray" Name="hint6Label" Height="54" Width="54" Margin="5" BorderThickness="2" BorderBrush="Black"></Label>
             </StackPanel>
             <RadioButton Foreground="White" Name="colorRadioButton" Checked="RadioButton_Checked" FontSize="20" HorizontalAlignment="Center" Content="Gebruikte kleur : 15 Strafpunten" Padding="5" VerticalContentAlignment="Center" Margin="0 30 0 10"></RadioButton>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

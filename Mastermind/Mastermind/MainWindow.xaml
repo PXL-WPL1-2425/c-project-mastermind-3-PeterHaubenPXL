@@ -85,8 +85,8 @@
             <Label Name="debugLabel2" Width="54" Height="54" Margin="10"></Label>
             <Label Name="debugLabel3" Width="54" Height="54" Margin="10"></Label>
             <Label Name="debugLabel4" Width="54" Height="54" Margin="10"></Label>
-            <Label Name="debugLabel5" Width="54" Height="54" Margin="10"></Label>
-            <Label Name="debugLabel6" Width="54" Height="54" Margin="10"></Label>
+            <Label Visibility="Collapsed" Name="debugLabel5" Width="54" Height="54" Margin="10"></Label>
+            <Label Visibility="Collapsed" Name="debugLabel6" Width="54" Height="54" Margin="10"></Label>
         </StackPanel>
         
     </Grid>

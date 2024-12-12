@@ -16,6 +16,7 @@ using System.Windows.Threading;
 using System.Xml.Linq;
 using Microsoft.VisualBasic;
 using static System.Formats.Asn1.AsnWriter;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Mastermind
 {
@@ -35,15 +36,15 @@ namespace Mastermind
         int colorCode2 = 0;
         int colorCode3 = 0;
         int colorCode4 = 0;
-        int colorCode5 = 0;
-        int colorCode6 = 0;
+        int colorCode5 = 0;     //Bijgevoegd sprint 3
+        int colorCode6 = 0;     //Bijgevoegd sprint 3
 
         int chosenColorCode1 = 0;
         int chosenColorCode2 = 0;
         int chosenColorCode3 = 0;
         int chosenColorCode4 = 0;
-        int chosenColorCode5 = 0;
-        int chosenColorCode6 = 0;
+        int chosenColorCode5 = 0;   //Bijgevoegd sprint 3
+        int chosenColorCode6 = 0;   //Bijgevoegd sprint 3
 
         bool dissolved = false;
         bool gameStarted = false;
@@ -68,7 +69,7 @@ namespace Mastermind
         string namePlayer = "";
         string nameNextPlayer = "";
 
-        public int amount = 4;
+        public int amount = 4;  //Default = 4
 
         public MainWindow()
         {
@@ -81,7 +82,7 @@ namespace Mastermind
             mastermindWindow.Top = 40;
             mastermindWindow.Left = 40;
 
-            timer.Interval = new TimeSpan(0, 0, 10); // Voorlopig op 15 seconden gezet
+            timer.Interval = new TimeSpan(0, 0, 10); // interval van 10 seconden
             timer.Tick += Timer_Tick;
 
             debugStackPanel.Visibility = Visibility.Hidden;
@@ -274,6 +275,24 @@ namespace Mastermind
                         }
                     }
                 }
+            }
+
+            if(amount < 5)
+            {
+                debugLabel5.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                debugLabel5.Visibility = Visibility.Visible;
+            }
+
+            if(amount < 6)
+            {
+                debugLabel6.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                debugLabel6.Visibility = Visibility.Visible;
             }
         }
 
@@ -1093,7 +1112,7 @@ namespace Mastermind
                                 {
                                     lbl.Background = Brushes.DarkGray;
                                     lbl.BorderBrush = Brushes.Transparent;
-                                    lbl.ToolTip = null;
+                                    lbl.ToolTip = "Foute kleur";
                                 }
                             }
                             counter++;
@@ -1280,6 +1299,8 @@ namespace Mastermind
                 {
                     // Gewonnen spel
 
+                    hintButton.IsEnabled = false;
+
                     attempts++;
                     scoreLabel.Content = $"{namePlayer} : Poging {attempts}/{chosenAttempts} Score = {points}";
                     debugStackPanel.Visibility = Visibility.Visible;
@@ -1308,9 +1329,17 @@ namespace Mastermind
                         MessageBoxResult result = MessageBox.Show("Wil je dezelfde spelreeks nog eens starten?", "Spelreeks ten einde", MessageBoxButton.YesNo);
                         if (result == MessageBoxResult.Yes)
                         {
-                            ChangeAttempts();
+                            result = MessageBoxResult.Cancel;
+                            if(chosenAttempts != 10)
+                            {
+                                result = MessageBox.Show("Wil je het aantal pogingen wijzigen?","Aantal pogingen wijzigen?",MessageBoxButton.YesNo,MessageBoxImage.Question);
+
+                                if(result == MessageBoxResult.Yes)
+                                {
+                                    ChangeAttempts();
+                                }
+                            }
                             
-                            //MessageBox.Show("ToDo Voorlopig dezelfde speler(s)", "ToDo");
                             playerCounter = 0;
 
                             StartGame();
@@ -1590,10 +1619,19 @@ namespace Mastermind
                         else
                         {
                             MessageBoxResult result = MessageBox.Show($"You failed! De correcte code was {codeString}.\nSpelreeks ten einde\n\nWil je nog een reeks spelen?", $"{namePlayer}", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
+                            
                             if (result == MessageBoxResult.Yes)
                             {
-                                ChangeAttempts();
+                                result = MessageBoxResult.Cancel;
+                                if (chosenAttempts != 10)
+                                {
+                                    result = MessageBox.Show("Wil je het aantal pogingen wijzigen?", "Aantal pogingen wijzigen?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                                    if (result == MessageBoxResult.Yes)
+                                    {
+                                        ChangeAttempts();
+                                    }
+                                }
 
                                 playerCounter = 0;
 
@@ -1602,7 +1640,6 @@ namespace Mastermind
                             else
                             {
                                 return;
-                                //this.Close();
                             }
                         }
                     }
@@ -1616,17 +1653,19 @@ namespace Mastermind
 
         private void ChangeAttempts()
         {
-            MessageBoxResult result = MessageBox.Show($"Wil je het aantal pogingen aanpassen?\nStaat nu op {chosenAttempts}", "Aantal pogingen aanpassen?", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.Yes)
+            string temp = "";
+            do
             {
-                playerCounter = 0;
-                newGameButton.IsEnabled = true;
-                chosenAttemptsMenuItem_Click(null, null);
-                return;
-            }
-            //MessageBox.Show("ToDo Voorlopig dezelfde speler(s)", "ToDo");
-            playerCounter = 0;
+                amountWindow instAmountWindow = new amountWindow();
+
+                instAmountWindow.amountTextBox.Focus();
+                instAmountWindow.ShowDialog();
+
+                temp = instAmountWindow.amountTextBox.Text;
+
+            } while (!int.TryParse(temp, out chosenAttempts) || chosenAttempts < 3 || chosenAttempts > 20);
+
+            //playerCounter = 0;
         }
 
         private void ChangeBorder(int attempst, int code, int colorPositie = 0)
@@ -1768,7 +1807,7 @@ namespace Mastermind
         }
 
         ///<summary>
-        ///Make  visible or hidden
+        ///Make the code visible or hidden
         /// </summary>
         private void ToggleDebug()
         {
@@ -1864,17 +1903,7 @@ namespace Mastermind
             // ToDo Enkel ingave van cijfers toestaan
             // Gaat niet met InputBox, Nieuw window met - ShowModal -
 
-            string temp = "";
-            do
-            {
-                amountWindow instAmountWindow = new amountWindow();
-
-                instAmountWindow.amountTextBox.Focus();
-                instAmountWindow.ShowDialog();
-
-                temp = instAmountWindow.amountTextBox.Text;
-
-            } while (!int.TryParse(temp, out chosenAttempts) || chosenAttempts < 3 || chosenAttempts > 20);
+            ChangeAttempts();
 
         }
 
@@ -1924,7 +1953,6 @@ namespace Mastermind
                 StartCountdown();
             }
         }
-
 
         private void choseCountCodeMenuItem_Click(object sender, RoutedEventArgs e)
         {

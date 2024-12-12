@@ -20,7 +20,11 @@ namespace Mastermind
     /// </summary>
     public partial class hintWindow : Window
     {
+        // Global variables
+
         MainWindow instMW;
+
+        int[] colorCodes = new int[6];
 
         List<StackPanel> list = new List<StackPanel>();
 
@@ -29,7 +33,6 @@ namespace Mastermind
             InitializeComponent();
 
             instMW = Application.Current.Windows.OfType<MainWindow>().SingleOrDefault();
-            int x = 0;
         }
 
         private void okHintButton_Click(object sender, RoutedEventArgs e)
@@ -41,6 +44,7 @@ namespace Mastermind
 
             int counter;
             int counter2;
+
 
             for (int i = list.Count - 1; i >= 1; i--)
             {
@@ -64,105 +68,111 @@ namespace Mastermind
 
                     if (colorRadioButton.IsChecked == true)
                     {
-                        counter = 0;
-                        foreach (var item in list[i - 1].Children)
-                        {
-                            if (counter >= 1) // counter 0 = serieLabel
-                            {
-                                if (item is Label lbl)
-                                {
-                                    if (lbl.BorderBrush == Brushes.Wheat)
-                                    {
-                                        if (lbl.Background == Brushes.Red)
-                                        {
-                                            if (colorCodes.Contains(1))
-                                            {
-                                                for (int j = 0; j < colorCodes.Length; j++)
-                                                {
-                                                    if (colorCodes[j] == 1)
-                                                    {
-                                                        colorCodes[j] = 0;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        else if (lbl.Background == Brushes.Yellow)
-                                        {
-                                            if (colorCodes.Contains(2))
-                                            {
-                                                for (int j = 0; j < colorCodes.Length; j++)
-                                                {
-                                                    if (colorCodes[j] == 2)
-                                                    {
-                                                        colorCodes[j] = 0;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        else if (lbl.Background == Brushes.Orange)
-                                        {
-                                            if (colorCodes.Contains(3))
-                                            {
-                                                for (int j = 0; j < colorCodes.Length; j++)
-                                                {
-                                                    if (colorCodes[j] == 3)
-                                                    {
-                                                        colorCodes[j] = 0;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        else if (lbl.Background == Brushes.White)
-                                        {
-                                            if (colorCodes.Contains(4))
-                                            {
-                                                for (int j = 0; j < colorCodes.Length; j++)
-                                                {
-                                                    if (colorCodes[j] == 4)
-                                                    {
-                                                        colorCodes[j] = 0;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        else if (lbl.Background == Brushes.Green)
-                                        {
-                                            if (colorCodes.Contains(5))
-                                            {
-                                                for (int j = 0; j < colorCodes.Length; j++)
-                                                {
-                                                    if (colorCodes[j] == 5)
-                                                    {
-                                                        colorCodes[j] = 0;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        else if (lbl.Background == Brushes.Blue)
-                                        {
-                                            if (colorCodes.Contains(6))
-                                            {
-                                                for (int j = 0; j < colorCodes.Length; j++)
-                                                {
-                                                    if (colorCodes[j] == 6)
-                                                    {
-                                                        colorCodes[j] = 0;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            counter++;
-                        }
+                        // Onderstaande geeft FOUT als alle vakken Ofwel darkred of wheat rand hebben
+                        // Zonder bestaat de mogelijkheid dat een kleur die een wheat rand heeft, 
+                        // gekozen wordt als mogelijke kleur, zonder positie.
+                        // Maar het programma loopt niet meer vast, als dit uitgeschakeld is
+
+                        //counter = 0;
+                        //foreach (var item in list[i - 1].Children)
+                        //{
+                        //    if (counter >= 1) // counter 0 = serieLabel
+                        //    {
+                        //        if (item is Label lbl)
+                        //        {
+                        //            if (lbl.BorderBrush == Brushes.Wheat)
+                        //            {
+                        //                if (lbl.Background == Brushes.Red)
+                        //                {
+                        //                    if (colorCodes.Contains(1))
+                        //                    {
+                        //                        for (int j = 0; j < colorCodes.Length; j++)
+                        //                        {
+                        //                            if (colorCodes[j] == 1)
+                        //                            {
+                        //                                colorCodes[j] = 0;
+                        //                                break;
+                        //                            }
+                        //                        }
+                        //                    }
+                        //                }
+                        //                else if (lbl.Background == Brushes.Yellow)
+                        //                {
+                        //                    if (colorCodes.Contains(2))
+                        //                    {
+                        //                        for (int j = 0; j < colorCodes.Length; j++)
+                        //                        {
+                        //                            if (colorCodes[j] == 2)
+                        //                            {
+                        //                                colorCodes[j] = 0;
+                        //                                break;
+                        //                            }
+                        //                        }
+                        //                    }
+                        //                }
+                        //                else if (lbl.Background == Brushes.Orange)
+                        //                {
+                        //                    if (colorCodes.Contains(3))
+                        //                    {
+                        //                        for (int j = 0; j < colorCodes.Length; j++)
+                        //                        {
+                        //                            if (colorCodes[j] == 3)
+                        //                            {
+                        //                                colorCodes[j] = 0;
+                        //                                break;
+                        //                            }
+                        //                        }
+                        //                    }
+                        //                }
+                        //                else if (lbl.Background == Brushes.White)
+                        //                {
+                        //                    if (colorCodes.Contains(4))
+                        //                    {
+                        //                        for (int j = 0; j < colorCodes.Length; j++)
+                        //                        {
+                        //                            if (colorCodes[j] == 4)
+                        //                            {
+                        //                                colorCodes[j] = 0;
+                        //                                break;
+                        //                            }
+                        //                        }
+                        //                    }
+                        //                }
+                        //                else if (lbl.Background == Brushes.Green)
+                        //                {
+                        //                    if (colorCodes.Contains(5))
+                        //                    {
+                        //                        for (int j = 0; j < colorCodes.Length; j++)
+                        //                        {
+                        //                            if (colorCodes[j] == 5)
+                        //                            {
+                        //                                colorCodes[j] = 0;
+                        //                                break;
+                        //                            }
+                        //                        }
+                        //                    }
+                        //                }
+                        //                else if (lbl.Background == Brushes.Blue)
+                        //                {
+                        //                    if (colorCodes.Contains(6))
+                        //                    {
+                        //                        for (int j = 0; j < colorCodes.Length; j++)
+                        //                        {
+                        //                            if (colorCodes[j] == 6)
+                        //                            {
+                        //                                colorCodes[j] = 0;
+                        //                                break;
+                        //                            }
+                        //                        }
+                        //                    }
+                        //                }
+                        //            }
+                        //        }
+                        //    }
+                        //    counter++;
+                        //}
                     }
+
                 }
             }
 
@@ -387,7 +397,6 @@ namespace Mastermind
             this.Close();
         }
 
-        int[] colorCodes = new int[6];
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -439,7 +448,28 @@ namespace Mastermind
                 counter++;
             }
             okHintButton.IsEnabled = false;
+
+            if(instMW.amount < 5)
+            {
+                hint5Label.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                hint5Label.Visibility = Visibility.Visible;
+            }
+
+            if (instMW.amount < 6)
+            {
+                hint6Label.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                hint6Label.Visibility = Visibility.Visible;
+            }
+
+
         }
 
     }
+
 }
